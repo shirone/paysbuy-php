@@ -15,29 +15,6 @@ class PaysbuyPaynow extends PaysbuyService {
 	];
 
 	public static function authenticate($data = []) {
-		$allFields = [
-			"psbID",
-			"username",
-			"securecode",
-			"inv",
-			"itm",
-			"amt",
-			"paypal_amt",
-			"curr_type",
-			"com",
-			"method",
-			"language",
-			"resp_front_url",
-			"resp_back_url",
-			"opt_fix_redirect",
-			"opt_fix_method",
-			"opt_name",
-			"opt_email",
-			"opt_mobile",
-			"opt_address",
-			"opt_detail",
-			"opt_param"
-		];
 		$reqdFields = [
 			"psbID",
 			"username",
@@ -51,6 +28,18 @@ class PaysbuyPaynow extends PaysbuyService {
 			"resp_front_url",
 			"resp_back_url"
 		];
+		$allFields = array_merge($reqdFields, [
+			"paypal_amt",
+			"com",
+			"opt_fix_redirect",
+			"opt_fix_method",
+			"opt_name",
+			"opt_email",
+			"opt_mobile",
+			"opt_address",
+			"opt_detail",
+			"opt_param"
+		]);
 
 		$res = parent::post(
 			self::_getURL(self::OP_AUTHENTICATE),
