@@ -10,15 +10,15 @@ class PaysbuyPaynow extends PaysbuyService {
 
 	const USER_PARAMS = [
 		'psbID' => PAYSBUY_PSBID,
-		'Username' => PAYSBUY_USERNAME,
-		'SecureCode' => PAYSBUY_SECURECODE
+		'username' => PAYSBUY_USERNAME,
+		'securecode' => PAYSBUY_SECURECODE
 	];
 
 	public static function authenticate($data = []) {
 		$allFields = [
 			"psbID",
 			"username",
-			"secureCode",
+			"securecode",
 			"inv",
 			"itm",
 			"amt",
@@ -41,7 +41,7 @@ class PaysbuyPaynow extends PaysbuyService {
 		$reqdFields = [
 			"psbID",
 			"username",
-			"secureCode",
+			"securecode",
 			"inv",
 			"itm",
 			"amt",
@@ -52,15 +52,20 @@ class PaysbuyPaynow extends PaysbuyService {
 			"resp_back_url"
 		];
 
-		$res = parent::get(
+		$res = parent::post(
 			self::_getURL(self::OP_AUTHENTICATE),
-			parent::buildParams(USER_PARAMS + $data, $allFields, $reqdFields)
-			$allFields,
-			$reqdFields,
-			USER_PARAMS + $data
+			parent::buildParams(self::USER_PARAMS + $data, $allFields, $reqdFields)
 		);
 
-		return simplexml_load_string($res)->xpath('/string')[0];
+		$res = simplexml_load_string($res)[0];
+		$code = substr($res, 0, 2);
+		$res = substr($res, 2);
+		if ($code == '00') {
+			return $res;
+		} else {
+			throw new Exception("Error Processing Request - '$res'", 1);
+		}
+	    
 	}
 
 	private static function _getURL($operation = "") {
