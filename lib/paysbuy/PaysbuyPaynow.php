@@ -54,7 +54,7 @@ class PaysbuyPaynow extends PaysbuyService {
 		} else {
 			throw new Exception("Error Processing Request - '$res'", 1);
 		}
-	    
+
 	}
 
 	private static function _getURL($operation = "") {

@@ -1,5 +1,5 @@
 <?php
 
-$main = "/paysbuy/";
+$main = dirname(__FILE__)."/paysbuy/";
 
-require_once dirname(__FILE__).$main.'PaysbuyPaynow.php';
+require_once $main.'PaysbuyPaynow.php';

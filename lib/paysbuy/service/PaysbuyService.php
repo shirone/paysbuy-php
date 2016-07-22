@@ -23,13 +23,11 @@ class PaysbuyService {
 	}
 
 	public static function get($url, $params = NULL) {
-		$res = self::_executeCurl($url, self::METHOD_GET, $params);
-		return $res;
+		return self::_executeCurl($url, self::METHOD_GET, $params);
 	}
 
 	public static function post($url, $params = NULL) {
-		$res = self::_executeCurl($url, self::METHOD_POST, $params);
-		return $res;
+		return self::_executeCurl($url, self::METHOD_POST, $params);
 	}
 
 	private static function _executeCurl($url, $method, $params = NULL) {
@@ -53,14 +51,13 @@ class PaysbuyService {
 			CURLOPT_HEADER => 0,
 			CURLINFO_HEADER_OUT => true,
 			CURLOPT_AUTOREFERER => true,
-			CURLOPT_TIMEOUT => PaysbuyService::TIMEOUT,
-			CURLOPT_CONNECTTIMEOUT => PaysbuyService::CONNECT_TIMEOUT,
+			CURLOPT_TIMEOUT => self::TIMEOUT,
+			CURLOPT_CONNECTTIMEOUT => self::CONNECT_TIMEOUT,
 		];
 
 		// Add POST params if we have some
 		if($method==self::METHOD_POST && count($params)) {
-			$options += [CURLOPT_POSTFIELDS => http_build_query($params)];
-			$options += [CURLOPT_POST => count($params)];
+			$options += [CURLOPT_POSTFIELDS => http_build_query($params), CURLOPT_POST => count($params)];
 		}
 
 		return $options;
