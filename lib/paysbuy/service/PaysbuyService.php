@@ -8,6 +8,8 @@ class PaysbuyService {
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';
 
+	public static $testMode = FALSE;
+
 	public static $psbID, $secureCode, $username;
 
 	public static function setup($d) {
@@ -21,7 +23,7 @@ class PaysbuyService {
 	}
 
 	public static function getDomain() {
-		return PAYSBUY_TESTMODE ? PAYSBUY_TEST_DOMAIN : PAYSBUY_LIVE_DOMAIN;
+		return self::$testMode ? PAYSBUY_TEST_DOMAIN : PAYSBUY_LIVE_DOMAIN;
 	}
 
 	public static function buildParams($params = [], $all = [], $reqd = []) {
