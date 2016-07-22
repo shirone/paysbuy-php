@@ -8,6 +8,14 @@ class PaysbuyService {
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';
 
+	public static $psbID, $secureCode, $username;
+
+	public static function setup($d) {
+		self::$psbID = $d['psbID'];
+		self::$secureCode = $d['secureCode'];
+		self::$username = $d['username'];
+	}
+
 	public static function getURL($operation) {
 		return self::getDomain() . '/' . static::ENDPOINT_URL . '/' . $operation;
 	}

@@ -5,14 +5,7 @@ require_once dirname(__FILE__).'/service/PaysbuyService.php';
 class PaysbuyPaynow extends PaysbuyService {
 
 	const ENDPOINT_URL = 'api_paynow/api_paynow.asmx';
-
 	const OP_AUTHENTICATE = 'api_paynow_authentication_v3';
-
-	const USER_PARAMS = [
-		'psbID' => PAYSBUY_PSBID,
-		'username' => PAYSBUY_USERNAME,
-		'securecode' => PAYSBUY_SECURECODE
-	];
 
 	public static function authenticate($data = []) {
 		$reqdFields = [
@@ -41,9 +34,15 @@ class PaysbuyPaynow extends PaysbuyService {
 			"opt_param"
 		]);
 
+		$userParams = [
+			'psbID' => PaysbuyService::$psbID,
+			'username' => PaysbuyService::$username,
+			'securecode' => PaysbuyService::$secureCode
+		];
+
 		$res = parent::post(
 			self::_getURL(self::OP_AUTHENTICATE),
-			parent::buildParams(self::USER_PARAMS + $data, $allFields, $reqdFields)
+			parent::buildParams($userParams + $data, $allFields, $reqdFields)
 		);
 
 		$res = simplexml_load_string($res)[0];
