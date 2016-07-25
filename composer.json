@@ -1,0 +1,22 @@
+{
+  "name": "paysbuy/paysbuy-php",
+  "description": "Paysbuy API PHP Lib",
+  "keywords": ["payment", "paysbuy", "creditcard"],
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/omise/omise-php.git",
+  "authors": [
+    {
+      "name": "Paysbuy",
+      "email": "support@paysbuy.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.2"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "classmap": ["lib/paysbuy/"]
+  }
+}
