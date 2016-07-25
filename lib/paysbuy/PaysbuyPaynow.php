@@ -7,7 +7,7 @@ class PaysbuyPaynow extends PaysbuyService {
 	const ENDPOINT_URL = 'api_paynow/api_paynow.asmx';
 	const OP_AUTHENTICATE = 'api_paynow_authentication_v3';
 
-	public static function authenticate($data = []) {
+	public static function authenticate($data = [], $codeOnly = FALSE) {
 		$reqdFields = [
 			"psbID",
 			"username",
@@ -49,7 +49,8 @@ class PaysbuyPaynow extends PaysbuyService {
 		$code = substr($res, 0, 2);
 		$res = substr($res, 2);
 		if ($code == '00') {
-			return $res;
+			$final = $codeOnly ? '' : PaysbuyService::getDomain().'/paynow.aspx?refid=';
+			return $final.$res;
 		} else {
 			throw new Exception("Error Processing Request - '$res'", 1);
 		}
