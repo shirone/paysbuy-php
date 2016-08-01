@@ -60,6 +60,7 @@ class PaysbuyService {
 		$options = [
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => $method,
+			CURLOPT_FRESH_CONNECT => true,
 			CURLOPT_RETURNTRANSFER => true, // return a string
 			CURLOPT_HEADER => 0,
 			CURLINFO_HEADER_OUT => true,
