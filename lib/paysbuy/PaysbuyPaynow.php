@@ -7,7 +7,9 @@ class PaysbuyPaynow extends PaysbuyService {
 	const ENDPOINT_URL = 'api_paynow/api_paynow.asmx';
 	const OP_AUTHENTICATE = 'api_paynow_authentication_v3';
 
-	public static function authenticate($data = [], $codeOnly = FALSE) {
+	const PAYMENT_URL = 'paynow.aspx?refid=%paymentCode%';
+
+	public static function authenticate($data = [], $returnPaymentURL = TRUE) {
 		$reqdFields = [
 			"psbID",
 			"username",
@@ -47,14 +49,18 @@ class PaysbuyPaynow extends PaysbuyService {
 
 		$res = simplexml_load_string($res)[0];
 		$code = substr($res, 0, 2);
-		$res = substr($res, 2);
+		$paymentCode = substr($res, 2);
 		if ($code == '00') {
-			$final = $codeOnly ? '' : PaysbuyService::getDomain().'/paynow.aspx?refid=';
-			return $final.$res;
+			$final = $returnPaymentURL ? self::getPaymentUrl($paymentCode) : $paymentCode;
+			return $final;
 		} else {
-			throw new Exception("Error Processing Request - '$res'", 1);
+			throw new Exception("Error Processing Request - '$paymentCode'", 1);
 		}
 
+	}
+
+	public static function getPaymentUrl($paymentCode) {
+		return parent::getDomain() . '/' . str_replace('%paymentCode%', $paymentCode, static::PAYMENT_URL);
 	}
 
 	private static function _getURL($operation = "") {

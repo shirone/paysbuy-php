@@ -8,7 +8,7 @@ PaysbuyService::setup([
 	'secureCode' => 'A1A849792963F2E5C5FAACFB8494C696'
 ]);
 
-$code = PaysbuyPaynow::authenticate([
+$paymentURL = PaysbuyPaynow::authenticate([
 	'method' => '1',
 	'language' => 'E',
 	'inv' => '201607211',
@@ -19,4 +19,4 @@ $code = PaysbuyPaynow::authenticate([
 	'resp_back_url' => 'http://blah.com/back.php'
 ]);
 
-var_dump($code);
+var_dump($paymentURL);
