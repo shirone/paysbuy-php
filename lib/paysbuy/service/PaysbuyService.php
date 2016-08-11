@@ -11,6 +11,19 @@ class PaysbuyService {
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';
 
+	public static $currencyCodeTypes = [
+		'THB' => 'TH',
+		'AUD' => 'AU',
+		'GBP' => 'GB',
+		'EUR' => 'EU',
+		'HKD' => 'HK',
+		'JPY' => 'JP',
+		'NZD' => 'NZ',
+		'SGD' => 'SG',
+		'CHF' => 'CH',
+		'USD' => 'US'
+	];
+
 	public static $testMode = FALSE;
 
 	public static $psbID, $secureCode, $username;
@@ -19,6 +32,11 @@ class PaysbuyService {
 		self::$psbID = $d['psbID'];
 		self::$secureCode = $d['secureCode'];
 		self::$username = $d['username'];
+	}
+
+	public static function currencyCodeToType($code) {
+		$code = strtoupper($code);
+		return array_key_exists($code, self::$currencyCodeTypes) ? self::$currencyCodeTypes[$code] : false;
 	}
 
 	public static function getURL($operation) {

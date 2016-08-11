@@ -42,6 +42,12 @@ class PaysbuyPaynow extends PaysbuyService {
 			'securecode' => PaysbuyService::$secureCode
 		];
 
+		// do a currency code -> type conversion if code is passed
+		if (array_key_exists("curr_code", $data) && $data['curr_code']) {
+			$data['curr_type'] = PaysbuyService::currencyCodeToType($data['curr_code']);
+			unset($data['curr_code']);
+		}
+
 		$res = parent::post(
 			self::_getURL(self::OP_AUTHENTICATE),
 			parent::buildParams($userParams + $data, $allFields, $reqdFields)
