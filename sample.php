@@ -2,13 +2,13 @@
 
 include dirname(__FILE__).'/lib/Paysbuy.php';
 
-PaysbuyService::setup([
+\PaysbuyService::setup([
 	'psbID' => '0276761817',
 	'username' => 'aomchom@paysbuy.com',
 	'secureCode' => 'A1A849792963F2E5C5FAACFB8494C696'
 ]);
 
-$paymentURL = PaysbuyPaynow::authenticate([
+$paymentURL = \PaysbuyPaynow::authenticate([
 	'method' => '1',
 	'language' => 'E',
 	'inv' => '201607211',
