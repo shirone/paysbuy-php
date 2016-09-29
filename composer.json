@@ -10,7 +10,6 @@
         }
     ],
 	"type": "library",
-	"version": "0.1.0",
 	"license": "OSL",
 	"require": {
 		"php": ">=5.3.2"
