@@ -11,7 +11,7 @@ class PaysbuyService {
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';
 
-	public static $currencyCodeTypes = [
+	public static $currencyCodeTypes = array(
 		'THB' => 'TH',
 		'AUD' => 'AU',
 		'GBP' => 'GB',
@@ -22,7 +22,7 @@ class PaysbuyService {
 		'SGD' => 'SG',
 		'CHF' => 'CH',
 		'USD' => 'US'
-	];
+	);
 
 	public static $testMode = FALSE;
 
@@ -47,7 +47,7 @@ class PaysbuyService {
 		return self::$testMode ? PAYSBUY_TEST_DOMAIN : PAYSBUY_LIVE_DOMAIN;
 	}
 
-	public static function buildParams($params = [], $all = [], $reqd = []) {
+	public static function buildParams($params = array(), $all = array(), $reqd = array()) {
 		$p = $params + array_fill_keys($all, '');
 		foreach($reqd as $r) if ($p[$r] == '') throw new Exception("Required parameter missing - ".$r, 1);
 		return $p;
@@ -75,7 +75,7 @@ class PaysbuyService {
 
 	private static function _getCURLOpts($method, $params = NULL) {
 
-		$options = [
+		$options = array(
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => $method,
 			CURLOPT_FRESH_CONNECT => true,
@@ -85,11 +85,11 @@ class PaysbuyService {
 			CURLOPT_AUTOREFERER => true,
 			CURLOPT_TIMEOUT => self::TIMEOUT,
 			CURLOPT_CONNECTTIMEOUT => self::CONNECT_TIMEOUT,
-		];
+		);
 
 		// Add POST params if we have some
 		if($method==self::METHOD_POST && count($params)) {
-			$options += [CURLOPT_POSTFIELDS => http_build_query($params), CURLOPT_POST => count($params)];
+			$options += array(CURLOPT_POSTFIELDS => http_build_query($params), CURLOPT_POST => count($params));
 		}
 
 		return $options;

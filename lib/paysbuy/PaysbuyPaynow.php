@@ -9,8 +9,8 @@ class PaysbuyPaynow extends PaysbuyService {
 
 	const PAYMENT_URL = 'paynow.aspx?refid=%paymentCode%';
 
-	public static function authenticate($data = [], $returnPaymentURL = TRUE) {
-		$reqdFields = [
+	public static function authenticate($data = array(), $returnPaymentURL = TRUE) {
+		$reqdFields = array(
 			"psbID",
 			"username",
 			"securecode",
@@ -22,8 +22,8 @@ class PaysbuyPaynow extends PaysbuyService {
 			"language",
 			"resp_front_url",
 			"resp_back_url"
-		];
-		$allFields = array_merge($reqdFields, [
+		);
+		$allFields = array_merge($reqdFields, array(
 			"paypal_amt",
 			"com",
 			"opt_fix_redirect",
@@ -34,13 +34,13 @@ class PaysbuyPaynow extends PaysbuyService {
 			"opt_address",
 			"opt_detail",
 			"opt_param"
-		]);
+		));
 
-		$userParams = [
+		$userParams = array(
 			'psbID' => PaysbuyService::$psbID,
 			'username' => PaysbuyService::$username,
 			'securecode' => PaysbuyService::$secureCode
-		];
+		);
 
 		// do a currency code -> type conversion if code is passed!
 		if (array_key_exists("curr_code", $data) && $data['curr_code']) {
