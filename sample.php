@@ -5,9 +5,9 @@ include dirname(__FILE__).'/lib/Paysbuy.php';
 
 // set up Paysbuy account details
 \PaysbuyService::setup(array(
-	'psbID' => '0276761817',
-	'username' => 'aomchom@paysbuy.com',
-	'secureCode' => 'A1A849792963F2E5C5FAACFB8494C696'
+	'psbID' => '1234567890',
+	'username' => 'email@mysite.com',
+	'secureCode' => '3281DEAD9647CAFE4096DEADBEEF0312'
 ));
 
 // build the URL that can be redirected to to make the payment
