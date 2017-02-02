@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__).'/service/PaysbuyService.php';
 
-class PaysbuyGetTrasaction extends PaysbuyService {
+class PaysbuyGetTransaction extends PaysbuyService {
 
 	const ENDPOINT_URL = 'psb_ws/getTransaction.asmx';
 	const OP_GET_TR_BY_INVOICE = 'getTransactionByInvoice';
