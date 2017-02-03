@@ -29,7 +29,8 @@ class PaysbuyGetTransaction extends PaysbuyService {
 			parent::buildParams($userParams + $data, $allFields, $reqdFields)
 		);
 
-		$res = simplexml_load_string($res)[0];
+		$res = simplexml_load_string($res);
+		$res = $res[0];
 		if ($res->getTransactionByInvoiceReturn) {
 			return (array) $res->getTransactionByInvoiceReturn;
 		} else {
@@ -58,7 +59,8 @@ class PaysbuyGetTransaction extends PaysbuyService {
 			parent::buildParams($userParams + $data, $allFields, $reqdFields)
 		);
 
-		$res = simplexml_load_string($res)[0];
+		$res = simplexml_load_string($res);
+		$res = $res[0];
 		if ($res->getTransactionDetailByInvoiceReturn) {
 			return (array) $res->getTransactionDetailByInvoiceReturn;
 		} else {

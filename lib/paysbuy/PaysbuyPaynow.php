@@ -53,7 +53,8 @@ class PaysbuyPaynow extends PaysbuyService {
 			parent::buildParams($userParams + $data, $allFields, $reqdFields)
 		);
 
-		$res = simplexml_load_string($res)[0];
+		$res = simplexml_load_string($res);
+		$res = $res[0];
 		$code = substr($res, 0, 2);
 		$paymentCode = substr($res, 2);
 		if ($code == '00') {
